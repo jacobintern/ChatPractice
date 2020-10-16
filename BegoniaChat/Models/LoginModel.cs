@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,21 +9,23 @@ namespace BegoniaChat.Models
 {
     public class LoginModel
     {
-        [MaxLength(50), Required]
-        public string Account { get; set; }
+        public ObjectId _id { get; set; }
 
         [MaxLength(50), Required]
-        public string Password { get; set; }
+        public string acc { get; set; }
 
-        [Compare("Password",ErrorMessage ="請確認與輸入密碼相同。")]
+        [MaxLength(50), Required]
+        public string pswd { get; set; }
+
+        [Compare("pswd",ErrorMessage ="請確認與輸入密碼相同。")]
         public string ConfirmPassword { get; set; }
 
-        public string Email { get; set; }
+        public string email { get; set; }
 
-        public string Gender { get; set; }
+        public string gender { get; set; }
 
         [MaxLength(20), Required]
-        public string FullName { get; set; }
+        public string name { get; set; }
 
         public bool IsRemember { get; set; }
 

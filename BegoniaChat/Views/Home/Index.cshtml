@@ -16,12 +16,12 @@
             <div class="main-login-form">
                 <div class="login-group">
                     <div class="form-group">
-                        @Html.LabelFor(m => Model.Account, "Username" , new { @class = "sr-only" })
-                        @Html.TextBoxFor(m => Model.Account, null, new { @class = "form-control", placeholder = "username", required = "required" })
+                        @Html.LabelFor(m => Model.acc, "name" , new { @class = "sr-only" })
+                        @Html.TextBoxFor(m => Model.acc, null, new { @class = "form-control", placeholder = "username", required = "required" })
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => Model.Password, "Password", new { @class = "sr-only" })
-                        @Html.PasswordFor(m => Model.Password, new { @class = "form-control", placeholder = "password", required = "required" })
+                        @Html.LabelFor(m => Model.pswd, "pswd", new { @class = "sr-only" })
+                        @Html.PasswordFor(m => Model.pswd, new { @class = "form-control", placeholder = "password", required = "required" })
                     </div>
                     <div class="form-group login-group-checkbox">
                         @Html.CheckBoxFor(m => Model.IsRemember)

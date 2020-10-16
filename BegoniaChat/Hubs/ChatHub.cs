@@ -38,8 +38,12 @@ namespace BegoniaChat.Hubs
         public void SendMessage(string toId, string message)
         {
             var fromName = UserHandler.ConnectedIds.Where(p => p.Key == Context.ConnectionId).FirstOrDefault().Value;
-            string msg = fromName + " <span style='color:red'> This is secret message  </span> ： " + message;
-            Clients.Client(toId).sendMessage(msg);
+            var toName = UserHandler.ConnectedIds.Where(p => p.Key == toId).FirstOrDefault().Value;
+            var fromId = UserHandler.ConnectedIds.Where(p => p.Key == Context.ConnectionId).FirstOrDefault().Key;
+            string toMsg = " <span style='color:red'> This is secret message from " + fromName + " </span> ： " + message;
+            string fromMsg = " <span style='color:red'> You says to " + toName + " </span> ：" + message;
+            Clients.Client(toId).sendMessage(toMsg);
+            Clients.Client(fromId).sendMessage(fromMsg);
         }
 
         public override System.Threading.Tasks.Task OnDisconnected(bool stopCalled)

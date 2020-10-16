@@ -17,12 +17,12 @@
                 <div class="main-login-form">
                     <div class="login-group">
                         <div class="form-group">
-                            @Html.LabelFor(m => Model.Account, "Username", new { @class = "sr-only" })
-                            @Html.TextBoxFor(m => Model.Account, null, new { @class = "form-control", placeholder = "username", required = "required" })
+                            @Html.LabelFor(m => Model.acc, "acc", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => Model.acc, null, new { @class = "form-control", placeholder = "username", required = "required" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => Model.Password, "Password", new { @class = "sr-only" })
-                            @Html.PasswordFor(m => Model.Password, new { @class = "form-control", placeholder = "password", required = "required" })
+                            @Html.LabelFor(m => Model.pswd, "pswd", new { @class = "sr-only" })
+                            @Html.PasswordFor(m => Model.pswd, new { @class = "form-control", placeholder = "password", required = "required" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => Model.ConfirmPassword, "ConfirmPassword", new { @class = "sr-only" })
@@ -30,18 +30,18 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(m => Model.Email, "Email", new { @class = "sr-only" })
-                            @Html.TextBoxFor(m => Model.Email, null, new { @class = "form-control", placeholder = "email" })
+                            @Html.LabelFor(m => Model.email, "email", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => Model.email, null, new { @class = "form-control", placeholder = "email" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => Model.FullName, "FullName", new { @class = "sr-only" })
-                            @Html.TextBoxFor(m => Model.FullName, null, new { @class = "form-control", placeholder = "full name" })
+                            @Html.LabelFor(m => Model.name, "name", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => Model.name, null, new { @class = "form-control", placeholder = "full name" })
                         </div>
 
                         <div class="form-group login-group-checkbox">
-                            @Html.RadioButtonFor(m => Model.Gender, "Male", new { id= "male" } )
+                            @Html.RadioButtonFor(m => Model.gender, "Male", new { id= "male" } )
                             @Html.Label("male", "Male")
-                            @Html.RadioButtonFor(m => Model.Gender, "Female", new { id = "female" } )
+                            @Html.RadioButtonFor(m => Model.gender, "Female", new { id = "female" } )
                             @Html.Label("female", "Female" )
                         </div>
 

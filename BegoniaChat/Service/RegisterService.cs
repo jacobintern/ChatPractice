@@ -1,4 +1,5 @@
 ﻿using BegoniaChat.Models;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,29 +9,23 @@ namespace BegoniaChat.Service
 {
     public class RegisterService
     {
-        private readonly ChatEFEntities chatDB;
+        private readonly MongoDBContext chatDB;
+        private readonly IMongoDatabase _chat_acc;
 
         public RegisterService()
         {
-            chatDB = new ChatEFEntities();
+            chatDB = new MongoDBContext();
+            _chat_acc = chatDB.GetDB("chat_db", "chat_acc");
         }
+
         public bool CreateUser(LoginModel model)
         {
             bool r = false;
             try
             {
-                // 資料交換
-                Chat_Acc_M newModel = new Chat_Acc_M()
-                {
-                    acc = model.Account,
-                    pswd = model.Password,
-                    email = model.Email,
-                    gender = model.Gender,
-                    name = model.FullName
-                };
-
-                chatDB.Chat_Acc_M.Add(newModel);
-                r = chatDB.SaveChanges() > 0;
+                var collection = _chat_acc.GetCollection<LoginModel>("chat_acc");
+                collection.InsertOne(model);
+                r = true;
             }
             catch(Exception ex)
             {

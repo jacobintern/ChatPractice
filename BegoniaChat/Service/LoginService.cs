@@ -1,38 +1,34 @@
 ﻿using BegoniaChat.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Web;
 
 namespace BegoniaChat.Service
 {
     public class LoginService
     {
-        private readonly ChatEFEntities chatDB;
-
+        private readonly MongoDBContext chatDB;
+        private readonly IMongoDatabase _chat_acc;
         public LoginService()
         {
-            chatDB = new ChatEFEntities();
+            chatDB = new MongoDBContext();
+            _chat_acc = chatDB.GetDB("chat_db", "chat_acc");
         }
         public bool VerifyUser(LoginModel model)
-            => chatDB.Chat_Acc_M.Any(x => x.acc == model.Account && x.pswd == model.Password);
+        {
+            var filter = Builders<LoginModel>.Filter.Eq("acc", model.acc)
+                & Builders<LoginModel>.Filter.Eq("pswd", model.pswd);
+            var collection = _chat_acc.GetCollection<LoginModel>("chat_acc");
+            return collection.Find(filter).Any();
+        }
 
         public List<LoginModel> GetAllUser()
-        {
-            List<Chat_Acc_M> tmpModel = chatDB.Chat_Acc_M.ToList();
-            List<LoginModel> model = new List<LoginModel>();
-            foreach (var tmp in tmpModel)
-            {
-                model.Add(new LoginModel()
-                {
-                    Account = tmp.acc,
-                    Email = tmp.email,
-                    FullName = tmp.name,
-                    Gender = tmp.gender
-                });
-            }
-            return model;
-        }
+            => _chat_acc.GetCollection<LoginModel>("chat_acc").Find(_ => true).ToList();
+
     }
 }
