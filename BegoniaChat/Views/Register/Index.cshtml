@@ -1,0 +1,62 @@
+﻿@model BegoniaChat.Models.LoginModel
+
+@section header{
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="~/Content/login-form.css" rel="stylesheet" />
+}
+
+<!-- REGISTER FORM -->
+<div class="text-center" style="padding:50px 0">
+    <div class="logo">register</div>
+    <!-- Main Form -->
+    <div class="login-form-1">
+        @using (Html.BeginForm("Create", "Register", FormMethod.Post, new { enctype = "multipart/form-data", CssStyleCollection = "text-left" }))
+        {
+            <form id="register-form" class="text-left">
+                <div class="login-form-main-message"></div>
+                <div class="main-login-form">
+                    <div class="login-group">
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.Account, "Username", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => Model.Account, null, new { @class = "form-control", placeholder = "username", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.Password, "Password", new { @class = "sr-only" })
+                            @Html.PasswordFor(m => Model.Password, new { @class = "form-control", placeholder = "password", required = "required" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.ConfirmPassword, "ConfirmPassword", new { @class = "sr-only" })
+                            @Html.PasswordFor(m => Model.ConfirmPassword, new { @class = "form-control", placeholder = "confirm password", required = "required" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.Email, "Email", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => Model.Email, null, new { @class = "form-control", placeholder = "email" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => Model.FullName, "FullName", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => Model.FullName, null, new { @class = "form-control", placeholder = "full name" })
+                        </div>
+
+                        <div class="form-group login-group-checkbox">
+                            @Html.RadioButtonFor(m => Model.Gender, "Male", new { id= "male" } )
+                            @Html.Label("male", "Male")
+                            @Html.RadioButtonFor(m => Model.Gender, "Female", new { id = "female" } )
+                            @Html.Label("female", "Female" )
+                        </div>
+
+                        <div class="form-group login-group-checkbox">
+                            <input type="checkbox" class="" id="reg_agree" name="reg_agree">
+                            <label for="reg_agree">i agree with <a href="#">terms</a></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                </div>
+                <div class="etc-login-form">
+                    <p>already have an account? <a href="@Url.Action("index", "Home")">login here</a></p>
+                </div>
+            </form>
+        }
+    </div>
+    <!-- end:Main Form -->
+</div>
